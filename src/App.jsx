@@ -3,16 +3,18 @@
 import 첫번째 from "./react-study/01-jsx-and-component/App01";
 import 두번째 from "./react-study/01-jsx-and-component/App02";
 import 네번째 from "./react-study/01-jsx-and-component/App04/App04";
+import App05 from "./react-study/01-jsx-and-component/App05/App05-01";
 
 function App() {
-    return (
-      <>
-        {/* App01 호출 */}
-        {/* <첫번째 /> */}
-        {/* <두번째 /> */}
-        <네번째 />
-      </>
-  )
+  return (
+    <>
+      {/* App01 호출 */}
+      {/* <첫번째 /> */}
+      {/* <두번째 /> */}
+      {/* <네번째 /> */}
+      <App05 />
+    </>
+  );
 }
 
-export default App
+export default App;
