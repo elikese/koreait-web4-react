@@ -6,6 +6,8 @@ import 네번째 from "./react-study/01-jsx-and-component/App04/App04";
 import App05 from "./react-study/01-jsx-and-component/App05/App05-01";
 import App06 from "./react-study/01-jsx-and-component/App06/App06";
 import UseState01 from "./react-study/02-useState/UseState01";
+import UseState02 from "./react-study/02-useState/UseState02";
+import UseState03 from "./react-study/02-useState/UseState03";
 
 function App() {
     return (
@@ -16,7 +18,9 @@ function App() {
             {/* <네번째 /> */}
             {/* <App05 /> */}
             {/* <App06 /> */}
-            <UseState01 />
+            {/* <UseState01 /> */}
+            {/* <UseState02 /> */}
+            <UseState03 />
         </>
     );
 }
