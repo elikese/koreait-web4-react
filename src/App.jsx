@@ -4,17 +4,21 @@ import 첫번째 from "./react-study/01-jsx-and-component/App01";
 import 두번째 from "./react-study/01-jsx-and-component/App02";
 import 네번째 from "./react-study/01-jsx-and-component/App04/App04";
 import App05 from "./react-study/01-jsx-and-component/App05/App05-01";
+import App06 from "./react-study/01-jsx-and-component/App06/App06";
+import UseState01 from "./react-study/02-useState/UseState01";
 
 function App() {
-  return (
-    <>
-      {/* App01 호출 */}
-      {/* <첫번째 /> */}
-      {/* <두번째 /> */}
-      {/* <네번째 /> */}
-      <App05 />
-    </>
-  );
+    return (
+        <>
+            {/* App01 호출 */}
+            {/* <첫번째 /> */}
+            {/* <두번째 /> */}
+            {/* <네번째 /> */}
+            {/* <App05 /> */}
+            {/* <App06 /> */}
+            <UseState01 />
+        </>
+    );
 }
 
 export default App;
