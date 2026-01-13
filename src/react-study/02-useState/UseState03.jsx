@@ -24,8 +24,17 @@ export default function UseState03() {
 
     const handleInputChange = (e) => {
         // name속성을 잘 이용해보세요
+        const { name, value } = e.target;
+        // name === "name" -> name Input
+        // name === "major" -> major Input
         // -> 두개의 input중 어떤 input인지 식별
         // setFormData()에 js 객체를 업데이트!
+
+        const newFormData = {
+            ...formData, // 기존값 복사
+            [name]: value, // 바뀐 값만 업데이트
+        };
+        setFormData(newFormData);
     };
 
     return (
@@ -46,6 +55,7 @@ export default function UseState03() {
                 onChange={handleInputChange}
                 placeholder="전공입력"
             />
+
             <p>이름:{formData.name}</p>
             <p>전공:{formData.major}</p>
         </div>
