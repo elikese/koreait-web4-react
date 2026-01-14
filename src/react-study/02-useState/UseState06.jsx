@@ -48,8 +48,29 @@ export default function UseState06() {
         setMemos(newMemos);
     };
 
-    const handleAllCheck = () => {};
-    const handleAllUnCheck = () => {};
+    // setMemos 호출!
+    const handleAllCheck = () => {
+        // {id:~, text:~, done:true or false}
+        setMemos((prev) => {
+            return prev.map((memo) => {
+                return {
+                    ...memo,
+                    done: true,
+                };
+            });
+        });
+    };
+
+    const handleAllUnCheck = () => {
+        setMemos((prev) => {
+            return prev.map((memo) => {
+                return {
+                    ...memo,
+                    done: false,
+                };
+            });
+        });
+    };
 
     return (
         <div>
@@ -79,6 +100,15 @@ export default function UseState06() {
                         </li>
                     );
                 })}
+            </ul>
+            <ul>
+                {memos
+                    .filter((memo) => {
+                        return memo.done;
+                    })
+                    .map((memo) => {
+                        return <li key={memo.id}>{memo.text}</li>;
+                    })}
             </ul>
         </div>
     );
