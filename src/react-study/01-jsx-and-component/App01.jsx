@@ -7,7 +7,7 @@ function App01() {
     const title = "React 수업 시작!";
     const content = "jsx가 뭔지 알아봅시다";
     const name = "리액트";
-    const myTag = <h1>{name}</h1>
+    const myTag = <h1>{name}</h1>;
 
     // JSX의 규칙
     // 1. return되는 것은 반드시 하나의 태그여야 한다.
@@ -22,6 +22,7 @@ function App01() {
             {myTag}
             <h2>{title}</h2>
             <p>{content}</p>
+            <p>{[<div>안녕</div>, <div>하세요</div>]}</p>
         </div>
     );
 }
