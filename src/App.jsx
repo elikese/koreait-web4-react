@@ -10,6 +10,7 @@ import UseState02 from "./react-study/02-useState/UseState02";
 import UseState03 from "./react-study/02-useState/UseState03";
 import UseState04 from "./react-study/02-useState/UseState04";
 import UseState05 from "./react-study/02-useState/UseState05";
+import UseState06 from "./react-study/02-useState/UseState06";
 
 function App() {
     return (
@@ -24,7 +25,8 @@ function App() {
             {/* <UseState02 /> */}
             {/* <UseState03 /> */}
             {/* <UseState04 /> */}
-            <UseState05 />
+            {/* <UseState05 /> */}
+            <UseState06 />
         </>
     );
 }
