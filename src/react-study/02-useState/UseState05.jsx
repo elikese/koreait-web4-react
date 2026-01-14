@@ -15,8 +15,10 @@ export default function UseState05() {
 
     const addTodoClick = () => {
         // [] -> ["빨래하기"]
-        todos.push(inputVal);
-        setTodos(todos);
+        // push 원본이 수정되는 메서드
+        // 1. setter에는 언제나 새객체를 넣어줘야함
+        // 2. prev는 배열, 객체도 기억하고있으니 spread 권장
+        setTodos((prev) => [...prev, inputVal]);
     };
 
     return (
@@ -32,7 +34,10 @@ export default function UseState05() {
             <button onClick={addTodoClick}>TO-DO 추가</button>
             <ul>
                 {todos.map((todo, i) => {
-                    // index를 넣으면 안됨
+                    // key로 index를 넣으면 안됨
+                    // 리액트가 리스트로 렌더링할때
+                    // 실제 데이터 기준으로 변경을 감지하는게 아니라
+                    // key를 기준으로 변경을 감지함
                     return <li key={i}>{todo}</li>;
                 })}
             </ul>
