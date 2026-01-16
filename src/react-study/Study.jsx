@@ -11,6 +11,7 @@ import UseState08 from "./02-useState/UseState08";
 import UseState09 from "./02-useState/UseState09";
 import Unmount from "./03-useEffect/Unmount/Unmount";
 import UseEffect01 from "./03-useEffect/UseEffect01";
+import UseEffect02 from "./03-useEffect/UseEffect02";
 
 export default function Study() {
     const stateStudy = {
@@ -26,8 +27,9 @@ export default function Study() {
         10: <NavBar />,
         11: <ModalContainer />,
         12: <UseEffect01 />,
-        13: <Unmount />
+        13: <Unmount />,
+        14: <UseEffect02 />
     };
 
-    return stateStudy[13];
+    return stateStudy[14];
 }
