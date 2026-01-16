@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function UseState09() {
     const [author, setAuthor] = useState("");
