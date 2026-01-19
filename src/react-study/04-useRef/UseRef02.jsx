@@ -35,8 +35,39 @@ export default function UseRef02() {
       div3.focus();
     }
 
+  }
+
+  const input1Ref = useRef(null);
+  const input2Ref = useRef(null);
+  const input3Ref = useRef(null);
+
+  const handleKeyDown2 = (e) => {
+    // dom객체를 가져오는 방법
+    // 1. 이벤트로 가져오기
+    // 2. Ref의 current로 가져오기
+
+    if(e.key !== "Enter") {
+      return;
+    }
+
+    const target = e.target;
+    if (target === input1Ref.current) {
+      input2Ref.current.focus();
+    } else if (target === input2Ref.current) {
+      input3Ref.current.focus();
+    }
 
   }
+
+  // 이벤트핸들러에 매개변수 하나 더!
+  const handleKeyDown3 = (e, nextRef) => {
+    if(e.key === "Enter" && nextRef) {
+      nextRef.current.focus();
+    }
+  }
+
+  
+
   return (
     <>
       <div>
@@ -59,9 +90,23 @@ export default function UseRef02() {
       <div>
         {/* 1번에서 enter -> 2번으로 focus */}
         {/* 2번에서 enter -> 3번으로 focus */}
-        <input type="text" placeholder="1번" />
-        <input type="text" placeholder="2번" />
-        <input type="text" placeholder="3번" />
+        <input 
+          type="text" 
+          placeholder="1번" 
+          onKeyDown={(e) => handleKeyDown3(e, input2Ref)}
+          ref={input1Ref}
+        />
+        <input 
+          type="text"
+          placeholder="2번"
+          onKeyDown={(e) => handleKeyDown3(e, input3Ref)}
+          ref={input2Ref}
+        />
+        <input 
+          type="text" 
+          placeholder="3번" 
+          ref={input3Ref}
+        />
       </div>
     </>
   )
