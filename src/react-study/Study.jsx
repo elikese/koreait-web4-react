@@ -14,26 +14,14 @@ import UseEffect01 from "./03-useEffect/UseEffect01";
 import UseEffect02 from "./03-useEffect/UseEffect02";
 import UseEffect03 from "./03-useEffect/UseEffect03";
 import UseEffect04 from "./03-useEffect/UseEffect04";
+import UseRef01 from "./04-useRef/UseRef01";
+import UseRef02 from "./04-useRef/UseRef02";
 
 export default function Study() {
     const stateStudy = {
-        1: <UseState01 />,
-        2: <UseState02 />,
-        3: <UseState03 />,
-        4: <UseState04 />,
-        5: <UseState05 />,
-        6: <UseState06 />,
-        7: <UseState07 />,
-        8: <UseState08 />,
-        9: <UseState09 />,
-        10: <NavBar />,
-        11: <ModalContainer />,
-        12: <UseEffect01 />,
-        13: <Unmount />,
-        14: <UseEffect02 />,
-        15: <UseEffect03 />,
-        16: <UseEffect04 />
+        1: <UseRef01 />,
+        2: <UseRef02 />
     };
 
-    return stateStudy[16];
+    return stateStudy[2];
 }

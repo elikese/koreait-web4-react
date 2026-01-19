@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-export default function () {
+export default function useEffect04() {
     const [formVal, setFormVal] = useState({
         email: "",
         password: ""
