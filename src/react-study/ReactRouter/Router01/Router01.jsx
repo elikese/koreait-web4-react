@@ -21,15 +21,55 @@ export default function Router01() {
       - path: url 경로
       - element: 해당경로에서 렌더링할 컴포넌트
     */
+
+    // 실습) profile 및 contact가 현재 상위 라우터에있는데
+    // UserRouter라는 하위 라우터를 만들어서 처리하게 해주세요!
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/user/*" element={<UserRouter />} />
+        {/* path="/경로/*" 하위경로는 하위라우터에게 위임 */}
+        <Route path="/shop/*" element={<ShopRouter />}/>
         {/* path="/*" -> 정의되지 않는 모든 경로를 처리(else) */}
         <Route path="/*" element={<h1>에러페이지(404)</h1>}/>
       </Routes>
     </BrowserRouter>
+  )
+}
+
+// UserRouter or AuthRouter
+function UserRouter() {
+  const accessToken = "토큰입니다";
+  // 권한검사 -> 토큰검사
+  // 1. accessToken이 있으면 -> 허용
+  // 2. accessToken이 없으면 -> 로그인페이지
+  if (!accessToken) {
+    return (<h1>로그인페이지 컴포넌트</h1>)
+  }
+  // 3. accessToken이 만료? -> 재요청(refresh)
+  
+  return (
+    <Routes>
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/contact" element={<ContactPage />} />
+    </Routes>
+  )
+}
+
+function ShopRouter() {
+  // 하위 라우터
+  // 하위 라우터에서 /shop/* 들어온 요청 처리
+  // 여기서 path는 products or cart이지 
+  // /shop/products or /shop/cart가 아님!!
+  // 이미 상위에서 /shop까지는 처리했기 때문
+  return (
+    <div>
+      <h1>쇼핑 영역입니다</h1>
+      <Routes>
+        <Route path="products" element={<ProductPage />}/>
+        <Route path="cart" element={<CartPage />}/>
+      </Routes>
+    </div>
   )
 }
 
@@ -90,11 +130,39 @@ function ContactPage() {
   // confirm으로 전송하시겠습니까?
   // true면 전송완료! alert 후 메인으로 이동
   // 메인으로-> 라우팅되게 변경
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    const confirmed = confirm("전송하시겠습니까?");
+    if(confirmed) {
+      alert("전송완료!")
+      navigate("/")
+    }
+  }
   return (
     <div>
       <h1>연락처 페이지</h1>
-      <button>전송</button>
-      <div>메인으로</div>
+      <button onClick={handleSubmit}>전송</button>
+      <Link>메인으로</Link>
+    </div>
+  )
+}
+
+function ProductPage() {
+  return (
+    <div>
+      <h1>상품목록</h1>
+      <p>입고예정</p>
+      <Link to="/shop/cart">장바구니로 이동</Link>
+    </div>
+  )
+}
+
+function CartPage() {
+  return (
+    <div>
+      <h1>장바구니</h1>
+      <p>상품 확인하세요</p>
+      <Link to="/shop/products">상품목록으로 이동</Link>
     </div>
   )
 }
