@@ -20,6 +20,7 @@ import Emotion01 from "./Emotion/Emotion01";
 import Emotion02 from "./Emotion/Emotion02";
 import Router01 from "./ReactRouter/Router01/Router01";
 import Router02 from "./ReactRouter/Router02/Router02";
+import Router03 from "./ReactRouter/Router03/Router03";
 
 export default function Study() {
     const stateStudy = {
@@ -28,8 +29,9 @@ export default function Study() {
         3: <Emotion01 />,
         4: <Emotion02 />,
         5: <Router01 />,
-        6: <Router02 />
+        6: <Router02 />,
+        7: <Router03 />
     };
 
-    return stateStudy[6];
+    return stateStudy[7];
 }

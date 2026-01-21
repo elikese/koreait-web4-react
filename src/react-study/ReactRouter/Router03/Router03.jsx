@@ -1,4 +1,6 @@
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+/** @jsxImportSource @emotion/react */
+import * as s from "./styles";
 
 const reservations = [
   {id:1, name: "홍길동", room: "101호", date: "2026-01-25"},
@@ -12,17 +14,16 @@ export default function Router03() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<ReservationList/>}/>
-        <Route />
+        <Route path="/" element={<ReservationList/>}/>
+        <Route path="/reservation/:id" element={<ReservationDetail />}/>
       </Routes>
     </BrowserRouter>
   )
 }
 // 도전! ReservationList 컴포넌트에서
-// ReservationCard를 map으로 뿌려주세요.
-// 해당 카드를 클릭하면 Deatil로 이동하게 만들어주세요
-// url에 해당 reservation의 id가 포함되어야 합니다
-
+// 1. ReservationCard를 map으로 뿌려주세요.
+// 2. 해당 카드를 클릭하면 Deatil로 이동하게 만들어주세요
+// 3. url에 해당 reservation의 id가 포함되어야 합니다
 
 function ReservationDetail() {
   return (
@@ -36,8 +37,7 @@ function ReservationDetail() {
 function ReservationCard({reservation, onClick}) {
   const {id, name, room, date} = reservation;
   return (
-    
-    <div onClick={onClick}>
+    <div css={s.card} onClick={onClick}>
       <h3>{name}님의 예약</h3>
       <p>예약번호: {id}</p>
       <p>객실: {room}</p>
@@ -47,12 +47,24 @@ function ReservationCard({reservation, onClick}) {
 }
 
 function ReservationList() {
+  // url변경 가능
+  const navigate = useNavigate();
+  const handleCardClick = (id) => {
+    navigate(`/reservation/${id}`);
+  }
+
   return (
-    <div>
+    <div css={s.container}>
       <h1>예약목록</h1>
-      <div>
+      <div css={s.cardList}>
         {reservations.map((r) => {
-          return
+          return (
+          <ReservationCard 
+            key={r.id}  
+            reservation={r}
+            onClick={() => navigate(`/reservation/${r.id}`)}
+          />
+        )
         })}
       </div>
     </div>
