@@ -13,7 +13,13 @@ export const cardList = css`
 `
 
 export const card = css`
-
+  padding: 15px;
+  background-color: #eee;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #ddd;
+  }
 `
 
 export const section = css`
