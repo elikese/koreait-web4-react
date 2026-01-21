@@ -1,0 +1,60 @@
+import { BrowserRouter, Route } from 'react-router-dom'
+
+const reservations = [
+  {id:1, name: "홍길동", room: "101호", date: "2026-01-25"},
+  {id:2, name: "김길동", room: "201호", date: "2026-01-26"},
+  {id:3, name: "이길동", room: "301호", date: "2026-01-27"},
+  {id:4, name: "최길동", room: "401호", date: "2026-01-28"},
+]
+
+
+export default function Router03() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<ReservationList/>}/>
+        <Route />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+// 도전! ReservationList 컴포넌트에서
+// ReservationCard를 map으로 뿌려주세요.
+// 해당 카드를 클릭하면 Deatil로 이동하게 만들어주세요
+// url에 해당 reservation의 id가 포함되어야 합니다
+
+
+function ReservationDetail() {
+  return (
+    <div>
+      <h1>예약 상세정보</h1>
+    </div>
+  )
+}
+
+
+function ReservationCard({reservation, onClick}) {
+  const {id, name, room, date} = reservation;
+  return (
+    
+    <div onClick={onClick}>
+      <h3>{name}님의 예약</h3>
+      <p>예약번호: {id}</p>
+      <p>객실: {room}</p>
+      <p>날짜: {date}</p>
+    </div>
+  )
+}
+
+function ReservationList() {
+  return (
+    <div>
+      <h1>예약목록</h1>
+      <div>
+        {reservations.map((r) => {
+          return
+        })}
+      </div>
+    </div>
+  )
+}
