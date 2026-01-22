@@ -7,15 +7,19 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import { useState } from "react"
+import { useModalStore } from "./store/modalStore";
 
+// 의미없이 하위 컴포넌트로 props 전달 -> Props Drilling
 export default function Zustand01() {
   // 모달버튼이 동작하게 완성해주세요
   const [isOpen, setIsOpen] = useState(false);
+  // openModal -> 전역상태인 isModalOpen을 true로 바꾸는 함수
+  const { openModal } = useModalStore();
   return (
     <div>
       <h1>메인페이지</h1>
-      <button>모달열기</button>
-      <Container1 />
+      <button onClick={openModal}>모달열기</button>
+      <Container1/>
     </div>
   )
 }
@@ -24,7 +28,7 @@ function Container1() {
   return (
     <div>
       C1이 C2호출
-      <Container2 />
+      <Container2/>
     </div>
   )
 }
@@ -33,21 +37,27 @@ function Container2() {
   return (
     <div>
       C2가 C3호출
-      <Container3 />
+      <Container3/>
     </div>
   )
 }
 
 function Container3() {
+  // isModalOpen -> 전역상태
+  // closeModal -> isModalOpen의 상태를 false로 만드는 함수
+  const {isModalOpen, closeModal} = useModalStore();
   return (
     <div>
-      <div css={modalOverlay}>
-        <div css={modalContent}>
-          <h2>MODAL</h2>
-          <p>MODAL TEXT</p>
-          <button>닫기</button>
+      {
+      isModalOpen && 
+        <div css={modalOverlay}>
+          <div css={modalContent}>
+            <h2>MODAL</h2>
+            <p>MODAL TEXT</p>
+            <button onClick={closeModal}>닫기</button>
+          </div>
         </div>
-      </div>
+      }
     </div>
   )
 }
