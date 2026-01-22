@@ -4,8 +4,74 @@
 // Redux(어려움), Zustand(쉬움), Recoil(사라짐), Zotai(중)
 // -> useState와는 분리된 상태저장소
 
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react"
+import { useState } from "react"
+
 export default function Zustand01() {
+  // 모달버튼이 동작하게 완성해주세요
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>Zustand01</div>
+    <div>
+      <h1>메인페이지</h1>
+      <button>모달열기</button>
+      <Container1 />
+    </div>
   )
 }
+
+function Container1() {
+  return (
+    <div>
+      C1이 C2호출
+      <Container2 />
+    </div>
+  )
+}
+
+function Container2() {
+  return (
+    <div>
+      C2가 C3호출
+      <Container3 />
+    </div>
+  )
+}
+
+function Container3() {
+  return (
+    <div>
+      <div css={modalOverlay}>
+        <div css={modalContent}>
+          <h2>MODAL</h2>
+          <p>MODAL TEXT</p>
+          <button>닫기</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const modalOverlay = css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const modalContent = css`
+  width: 60vw;
+  height: 50vh;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+
+  /* &: css가 적용된 자기 자신 */
+  & > button {
+    cursor: pointer;
+  }
+`;

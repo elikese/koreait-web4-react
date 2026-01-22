@@ -8,9 +8,9 @@ CSS in JS 라이브러리 - react
 
 // 1. jsx 태그에 css속성을 부여했음
 /** @jsxImportSource @emotion/react */
-
 // 2. css 객체를 만들기 편하게 만들어 놓았음
 // css``; css객체를 생성
+
 import { css } from "@emotion/react"
 const box1 = css`
   width: 100px;
