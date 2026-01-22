@@ -7,6 +7,7 @@ export default function Zustand02() {
     author: "",
     price: 0
   });
+  const { setNewBook } = useCurrentBook();
 
   const handleChange = (e) => {
     let {name, value} = e.target;
@@ -21,6 +22,8 @@ export default function Zustand02() {
     })
   }
   const handleSubmit = () => {
+    setNewBook({...form});
+
     setForm({
       title: "",
       author: "",
