@@ -6,19 +6,24 @@
 
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
-import { useState } from "react"
 import { useModalStore } from "./store/modalStore";
+import { useToastStore } from "./store/toastStore";
 
 // 의미없이 하위 컴포넌트로 props 전달 -> Props Drilling
 export default function Zustand01() {
-  // 모달버튼이 동작하게 완성해주세요
-  const [isOpen, setIsOpen] = useState(false);
   // openModal -> 전역상태인 isModalOpen을 true로 바꾸는 함수
   const { openModal } = useModalStore();
+  const { showToast } = useToastStore();
   return (
     <div>
       <h1>메인페이지</h1>
       <button onClick={openModal}>모달열기</button>
+      {/* 버튼을누르면 MyToast가 보이게 */}
+      <button 
+        onClick={() => showToast("Z01에서 토스트띄웁니다")}
+      >
+        토스트 띄우기
+      </button>
       <Container1/>
     </div>
   )

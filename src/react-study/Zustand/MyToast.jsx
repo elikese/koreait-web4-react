@@ -14,21 +14,27 @@ const toastStyle = css`
 `
 
 export default function MyToast() {
-  const {} = useToastStore();
+  const {isVisible, hideToast, message} = useToastStore();
 
   useEffect(() => {
-    // useEffect의 전체코드는 toast전역상태가 true일때만
-    const timer = setTimeout(() => {
-      // toast전역상태를 false로 바꾸는 함수 호출
-    } ,2500)
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        // toast전역상태를 false로 바꾸는 함수 호출
+        hideToast()
+      }, 2500);
 
-    return () => clearTimeout(timer)
-  }, [])
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible])
 
   // 조건문으로 toast전역상태가 false면
   // return null
+  if (!isVisible) {
+    return null;
+  }
 
   return (
-    <div css={toastStyle}>MyToast</div>
+    // 메세지도 전역으로 관리 가능? o
+    <div css={toastStyle}>{message}</div>
   )
 }
