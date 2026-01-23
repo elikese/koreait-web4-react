@@ -43,7 +43,7 @@ export default function Zustand04() {
         onChange={handleChange}
         value={form.price}
       />
-      <button onClick={handleAdd}>추가</button>
+      <button>추가</button>
       <ul>
         {books.map((book) => {
           return <Book key={book.id} book={book}/>
@@ -65,12 +65,21 @@ function Book({book, onRemove, onUpdate}) {
       2. 취소버튼
       3. 완료버튼
       */}
-      {isEditing}
-      <>
-        <span>{price}원</span>
-        <button>수정</button>
-        <button>삭제</button>
-      </>
+      {isEditing 
+      ?
+        <>
+          <input type="text" />
+          <button onClick={() => setIsEditing(false)}>취소</button>
+          <button>완료</button>
+        </>
+      :
+        <>
+          <span>{price}원</span>
+          <button onClick={() => setIsEditing(true)}>수정</button>
+          <button>삭제</button>
+        </>
+      }
+      
     </li>
   )
 }

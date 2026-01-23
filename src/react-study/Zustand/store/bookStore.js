@@ -24,18 +24,17 @@ export const useCurrentBook = create((set) => {
 });
 
 export const useBookList = create((set) => {
-  // R
-  books: [{
-    id: 1,
-    title: "자바의정석",
-    author: "남궁성",
-    price: "30000"
-  }]
-
-  // C - add
-
-  // U - update
-
-  // D - remove
-
+  return {
+    books: [
+      {
+        id: 1,
+        title: "자바의정석",
+        author: "남궁성",
+        price: "30000"
+      }
+    ],
+    //C
+    //U
+    //D
+  }
 })
