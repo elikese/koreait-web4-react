@@ -56,11 +56,11 @@ export const useBookList = create((set) => {
     }),
 
     // D
-    // 내가 전달해준 이거 빼고 나머지만 남겨줘
-    removeBook: () => set((prev) => {
+    // 내가 전달해준 id 빼고 나머지만 남겨줘 - filter
+    removeBook: (id) => set((prev) => {
       return {
         ...prev,
-        books:
+        books: prev.books.filter((book) => book.id !== id)
       }
     })
   }

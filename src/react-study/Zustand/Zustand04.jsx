@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useBookList } from './store/bookStore'
 
 export default function Zustand04() {
-  const {books} = useBookList();
+  const {books, removeBook, updateBook, addBook} = useBookList();
   const [form, setForm] = useState({
     title: "",
     author: "",
@@ -17,6 +17,15 @@ export default function Zustand04() {
         [name]: value
       }
     });
+  }
+
+  const handleAdd = () => {
+    addBook(form);
+    setForm({
+      title: "",
+      author: "",
+      price: ""
+    })
   }
 
   return (
@@ -43,10 +52,15 @@ export default function Zustand04() {
         onChange={handleChange}
         value={form.price}
       />
-      <button>추가</button>
+      <button onClick={handleAdd}>추가</button>
       <ul>
         {books.map((book) => {
-          return <Book key={book.id} book={book}/>
+          return <Book 
+            key={book.id} 
+            book={book}
+            onUpdate={updateBook}
+            onRemove={removeBook}
+          />
         })}
       </ul>
     </div>
@@ -57,6 +71,13 @@ export default function Zustand04() {
 function Book({book, onRemove, onUpdate}) {
   const {title, author, price} = book;
   const [isEditing, setIsEditing] = useState(false);
+  const [editPrice, setEditPrice] = useState(price);
+  
+  const handleUpdate = () => {
+    onUpdate(book.id, editPrice);
+    setIsEditing(false);
+  }
+
   return (
     <li>
       <strong>{title}</strong> - {author}
@@ -68,15 +89,19 @@ function Book({book, onRemove, onUpdate}) {
       {isEditing 
       ?
         <>
-          <input type="text" />
+          <input 
+            type="number"
+            value={editPrice}
+            onChange={(e) => setEditPrice(e.target.value)}
+          />
           <button onClick={() => setIsEditing(false)}>취소</button>
-          <button>완료</button>
+          <button onClick={handleUpdate}>완료</button>
         </>
       :
         <>
           <span>{price}원</span>
           <button onClick={() => setIsEditing(true)}>수정</button>
-          <button>삭제</button>
+          <button onClick={() => onRemove(book.id)}>삭제</button>
         </>
       }
       
