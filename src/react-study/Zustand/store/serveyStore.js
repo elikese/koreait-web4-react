@@ -24,7 +24,14 @@ export const useSurveyStore = create((set) => {
         ...prev,
         surveyData: {...prev.surveyData, ...objData}
       }
-    })
-
+    }),
+    
+    // 이메일만 업데이트 할 수 있는 setter
+    setEmail: (email) => set((prev) => {
+      return {
+        ...prev,
+        surveyData: {...prev.surveyData, email}
+      }
+    }),
   }
 })

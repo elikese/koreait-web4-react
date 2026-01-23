@@ -21,4 +21,21 @@ export const useCurrentBook = create((set) => {
     // set을써서 전역상태인 book의 필드 
     // 일부만 업데이트 가능할까?
   }
+});
+
+export const useBookList = create((set) => {
+  // R
+  books: [{
+    id: 1,
+    title: "자바의정석",
+    author: "남궁성",
+    price: "30000"
+  }]
+
+  // C - add
+
+  // U - update
+
+  // D - remove
+
 })

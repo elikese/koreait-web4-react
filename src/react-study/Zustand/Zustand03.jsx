@@ -7,7 +7,7 @@ export default function Zustand03() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Step1 />}/>
-        <Route path='/step2'/>
+        <Route path='/step2' element={<Step2 />} />
       </Routes>
     </BrowserRouter>
   )
@@ -18,7 +18,7 @@ function Step1() {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const navigator = useNavigate();
-  const { setServayInfo } = useSurveyStore();
+  const { setSurveyInfo } = useSurveyStore();
 
   const handleNext = () => {
     // 도전)) 전역상태에 있는 suveyData에서
@@ -28,7 +28,7 @@ function Step1() {
       age: age,
       gender: gender
     }
-    setServayInfo(myUpdateData);
+    setSurveyInfo(myUpdateData);
     navigator("/step2");
   }
 
@@ -56,7 +56,7 @@ function Step1() {
           <option value="male">남성</option>
           <option value="female">여성</option>
         </select>
-        <button onChange={handleNext}>다음</button>
+        <button onClick={handleNext}>다음</button>
       </div>
     </div>
   )
@@ -67,6 +67,19 @@ function Step2() {
   const [satisfaction, setSatisfaction] = useState("");
   const [recommend, setRecommend] = useState("");
   const [email, setEmail] = useState("");
+  const {setSurveyInfo} = useSurveyStore();
+
+  const handleSubmit = () => {
+    if(satisfaction && recommend && email) {
+      alert("제출완료!");
+    }
+    const data = {
+      "satisfaction": satisfaction,
+      "recommend": recommend,
+      "email": email
+    }
+    setSurveyInfo(data);
+  }
 
   const scores = [
     <option>선택하세요</option>,
