@@ -30,11 +30,38 @@ export const useBookList = create((set) => {
         id: 1,
         title: "자바의정석",
         author: "남궁성",
-        price: "30000"
+        price: "30000",
       }
     ],
     //C
-    //U
-    //D
+    addBook: (book) => set((prev) => {
+      return {
+        ...prev,
+        // spread로 없던 id key 추가
+        books: [...prev.books, {...book, id: Date.now()}]
+      }
+    }),
+
+    // U
+    updateBook: (id, updatePrice) => set((prev) => {
+      return {
+        ...prev,
+        // map(), filter() -> 새로운 []를 리턴
+        books: prev.books.map((book) => {
+          return book.id === id 
+            ? {...book, "price": updatePrice} 
+            : book
+        })
+      }
+    }),
+
+    // D
+    // 내가 전달해준 이거 빼고 나머지만 남겨줘
+    removeBook: () => set((prev) => {
+      return {
+        ...prev,
+        books:
+      }
+    })
   }
 })
