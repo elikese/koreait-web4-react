@@ -18,6 +18,7 @@ import UseRef01 from "./04-useRef/UseRef01";
 import UseRef02 from "./04-useRef/UseRef02";
 import Axios01 from "./Axios/Axios01";
 import Axios02 from "./Axios/Axios02";
+import Axios03 from "./Axios/Axios03";
 import Emotion01 from "./Emotion/Emotion01";
 import Emotion02 from "./Emotion/Emotion02";
 import Router01 from "./ReactRouter/Router01/Router01";
@@ -46,8 +47,9 @@ export default function Study() {
         12: <Zustand03 />,
         13: <Zustand04 />,
         14: <Axios01 />,
-        15: <Axios02 />
+        15: <Axios02 />,
+        16: <Axios03 />
     };
 
-    return stateStudy[15];
+    return stateStudy[16];
 }
