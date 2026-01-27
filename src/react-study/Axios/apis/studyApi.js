@@ -12,3 +12,9 @@ export const getUsersApi = async () => {
   const response = await instance.get("/users");
   return response;
 }
+
+// api 요청 함수를 만들고
+// UserPostList에서 import하여 기능을 완성해주세요
+export const getUserPosts = () => {
+
+}

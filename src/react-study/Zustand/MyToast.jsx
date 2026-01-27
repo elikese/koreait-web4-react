@@ -4,8 +4,9 @@ import { useEffect } from "react"
 import { useToastStore } from "./store/toastStore"
 const toastStyle = css`
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #777;
   color: white;
   padding: 12px 20px;

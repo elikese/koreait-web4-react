@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { getSearchProductApi } from "./apis/productApi";
+import { useToastStore } from "../Zustand/store/toastStore";
 
 // api 요청할 때 쿼리스트링 조립
 export default function Axios02() {
   const [inputVal, setInputVal] = useState("");
   const [products, setProducts] = useState([]);
   const [errMsg, setErrMsg] = useState("");
+  const {showToast} = useToastStore();
   
   const handleSearchClick = async () => {
     // 상품검색 api 호출함수 import
@@ -31,6 +33,7 @@ export default function Axios02() {
         // {}
         const resErrMsg = error.response.data;
         setErrMsg(resErrMsg);
+        showToast(resErrMsg);
         setProducts([]);
       }
     }
