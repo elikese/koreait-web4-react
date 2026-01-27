@@ -15,6 +15,12 @@ export const getUsersApi = async () => {
 
 // api 요청 함수를 만들고
 // UserPostList에서 import하여 기능을 완성해주세요
-export const getUserPosts = () => {
-
+export const getUserPosts = async (userId) => {
+  // https://jsonplaceholder.typicode.com/posts?userId=?
+  const response = await instance.get("/posts", {
+    params: {
+      "userId": userId,
+    }
+  });
+  return response;
 }
