@@ -4,6 +4,7 @@ import { getAllProductsApi } from "./apis/productApi";
 
 export default function Axios06() {
   const [products, setProducts] = useState([]);
+  const [refetch, setRefetch] = useState(true);
   // ui 테스트 가짜데이터
   const mockProducts = [
     {id:1, name:"가짜키보드", price: 10000},
@@ -15,14 +16,19 @@ export default function Axios06() {
       const res = await getAllProductsApi();
       const productsData = res.data;
       setProducts(productsData);
+      // get요청이 끝나면 false로 바꿔줘야함
+      setRefetch(false);
+
     } catch (error) {
       // 비워둘게요
     }
   }
 
   useEffect(() => {
-    getProducts();
-  }, []);
+    if (refetch) {
+      getProducts();
+    }
+  }, [refetch]);
 
   return (
     <div>
@@ -37,11 +43,22 @@ export default function Axios06() {
           </tr>
         </thead>
         <tbody>
-          {mockProducts.map((p) => {
-            return <ProductItem key={p.id} product={p}/>
+          {products.map((p) => {
+            return <ProductItem 
+              key={p.id} 
+              product={p}
+              doRefetch={() => setRefetch(true)}
+            />
           })}
         </tbody>
       </table>
     </div>
   )
 }
+
+// 자식컴포넌트들이 get요청할 권한
+// -> refetch 상태 생성
+// -> true일때만 get요청을 하도록
+// useEffect는 refetch상태변경이 되면 실행
+// -> false가 되는 시점이 필요
+// -> get요청 이후에 false가 되게 만들자!

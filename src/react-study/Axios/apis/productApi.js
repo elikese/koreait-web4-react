@@ -46,3 +46,9 @@ export const getAllProductsApi = async () => {
   const response = await instance.get("/all");
   return response;
 }
+
+// 삭제 api함수
+export const deleteProductApi = async (id) => {
+  const response = await instance.delete(`/${id}`);
+  return response;
+}
