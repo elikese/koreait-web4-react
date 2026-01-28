@@ -42,3 +42,7 @@ export const addBulkProductApi = async (products) => {
 }
 
 // 전체상품조회 api함수 정의 - get요청(/all)
+export const getAllProductsApi = async () => {
+  const response = await instance.get("/all");
+  return response;
+}

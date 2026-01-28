@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ProductItem from "./ProductItem";
+import { getAllProductsApi } from "./apis/productApi";
 
 export default function Axios06() {
   const [products, setProducts] = useState([]);
@@ -9,8 +10,19 @@ export default function Axios06() {
     {id:2, name:"가짜마우스", price: 20000}
   ];
 
-  
+  const getProducts = async () => {
+    try {
+      const res = await getAllProductsApi();
+      const productsData = res.data;
+      setProducts(productsData);
+    } catch (error) {
+      // 비워둘게요
+    }
+  }
 
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <div>
