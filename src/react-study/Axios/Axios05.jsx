@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import { addBulkProductApi } from './apis/productApi'
+import { useToastStore } from '../Zustand/store/toastStore'
 
 export default function Axios05() {
   // 다건추가 -> dto의 모습 [{}, {}.., {}]
   const [productList, setProductList] = useState([
     {name: "", price: ""}, // 초기값 1개의 객체만
-  ])
+  ]);
+  const {showToast} = useToastStore();
 
   // 한줄 추가 핸들러
   const handleAddRow = () => {
@@ -30,15 +33,26 @@ export default function Axios05() {
     setProductList(newProductList);
   }
 
-  const handleAddBulk = () => {
+  const handleAddBulk = async () => {
     // 전송전에 확인
     console.log(productList);
+    try {
+      const response = await addBulkProductApi(productList);
+      const msg = response.data;
+      showToast(msg);
+      setProductList([{name: "", price: ""}]); // 초기값
+    } catch (error) {
+      showToast("상품 등록에 실패했습니다")
+    }
   }
 
   const handleRowRemove = (idx) => {
     // productList에서 해당 idx만 제거
     // 이것만 빼고 다 ok
-    
+    // -> 매개변수로 들어온 idx빼고 다 ok
+    const newProductList
+      = productList.filter((_, i) => idx !== i);
+    setProductList(newProductList);
   }
 
   return (
@@ -63,7 +77,11 @@ export default function Axios05() {
                 value={product.price}
                 onChange={(e) => handleinputVal(e, idx)}
               />
-              <button>삭제</button>
+              <button 
+                onClick={() => handleRowRemove(idx)}
+              >
+                삭제
+              </button>
             </div>
           )
         })}

@@ -33,3 +33,12 @@ export const addProductApi = async (product) => {
   const response = await instance.post("/add", product);
   return response;
 }
+
+// 다건추가
+// [{}, {}..]
+export const addBulkProductApi = async (products) => {
+  const response = await instance.post("/add/bulk", products);
+  return response;
+}
+
+// 전체상품조회 api함수 정의 - get요청(/all)
