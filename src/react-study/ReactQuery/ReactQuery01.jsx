@@ -31,7 +31,7 @@ export default function ReactQuery01() {
     // B가 A의 요청결과를 필요로할때 !!A의요청결과
     enabled: true, // false면 수동으로만 실행
     retry: 3, // 실패시 재시도 횟수
-    gcTime: 5 * 60 * 1000 // 캐시 메모리 보관시간
+    gcTime: 5 * 60 * 1000, // 캐시 메모리 보관시간,
   });
 
   if(isLoading) {

@@ -1,9 +1,35 @@
-import React from 'react'
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
 
 export default function ReactQuery02() {
   // useQuery만 사용하여서
   // https://jsonplaceholder.typicode.com/users
   // get요청하여 데이터를 map으로 뿌려주세요
+  const {
+    data: users,
+    isLoading,
+    isError,
+    error
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+      return res.data;
+    }
+  });
+
+  if (isError) {
+    console.log(error.message);
+    return (
+      <h1>{error.message}</h1>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <h1>로딩중입니다</h1>
+    )
+  }
 
   return (
     <div>
@@ -17,7 +43,18 @@ export default function ReactQuery02() {
             <th>이메일</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {users.map((u) => {
+            return (
+              <tr key={u.id}>
+                <td>{u.id}</td>
+                <td>{u.username}</td>
+                <td>{u.name}</td>
+                <td>{u.email}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
     </div>
   )
