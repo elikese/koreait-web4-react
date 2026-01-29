@@ -18,7 +18,7 @@ export default function ReactQuery01() {
   } = useQuery({
     // get요청 결과를 key-value형태로 전역에 저장
     // 다른컴포넌트에서 같은 key로 저장시, get요청 안하고 재사용
-    queryKey: ["products"],
+    queryKey: ["getAllProduct"],
     // api 요청함수를 정의
     queryFn: async () => {
       const url = "http://localhost:8080/product/all"
@@ -34,6 +34,11 @@ export default function ReactQuery01() {
     gcTime: 5 * 60 * 1000 // 캐시 메모리 보관시간
   });
 
+  if(isLoading) {
+    return (
+      <div>로딩 중입니다.....</div>
+    )
+  }
 
   return (
     <div>
