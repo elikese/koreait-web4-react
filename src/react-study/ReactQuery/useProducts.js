@@ -4,7 +4,7 @@
 // 2. retrun이후코드 -> 여러 컴포넌트
 // 여러컴포넌트 !== 여러 jsx파일
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 // 커스텀 훅
@@ -26,4 +26,36 @@ export const useSearchProducts = (nameKeyword) => {
   });
 
   return [data, isLoading, error, isError];
+}
+
+
+// 상품다건 등록
+export const useAddBulkProducts = () => {
+  // 생성x, 부모컴포넌트에 있는 client를 참조
+  const queryClient = useQueryClient();
+
+  // get요청 이외의 요청의 주도권은 내가 가짐
+  // useMutation은 정의만 되어있고
+  // 실제로 호출하려면 mutate()
+  // mutate가 mutationFn임
+  return useMutation({
+    mutationFn: async (products) => {
+      const url = "http://localhost:8080/product/add/bulk";
+      const res = await axios.post(url, products);
+      return res.data;
+    },
+    // 성공시 실행할 함수
+    onSuccess: () => {
+      // "products"를 key로 포함한 모든 전역데이터들이
+      // 무효화(stale(상한)상태) -> get요청 일어남
+      queryClient.invalidateQueries({
+        // 무효화할 key가 부분일치만 해도 무효화
+        queryKey: ["searchProducts"]
+      })
+    },
+    // 에러시 실행할 함수
+    onError: () => {
+      console.log("에러발생!");
+    }
+  });
 }
