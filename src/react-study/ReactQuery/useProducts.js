@@ -74,9 +74,7 @@ export const useGetAllProducts = () => {
 }
 
 const updateProductApi = async (id, product) => {
-  const url = `http://localhost:8080/product/${id}`
-  console.log(id);
-  console.log(product);
+  const url = `http://localhost:8080/product/${id}`;
   const response = await axios.put(url, product);
   return response.data;
 }
@@ -97,10 +95,18 @@ export const useUpdateProduct = () => {
   });
 }
 
-const deleteProductApi = async () => {
-
+const deleteProductApi = async (id) => {
+  const url = `http://localhost:8080/product/${id}`;
+  const response = await axios.delete(url);
+  return response.data;
 }
 
 export const useDeleteProduct = () => {
-  
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id) => deleteProductApi(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["getAllProduct"]})
+    }
+  });
 }

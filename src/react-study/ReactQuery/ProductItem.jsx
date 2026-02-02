@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useToastStore } from '../Zustand/store/toastStore';
-import { useUpdateProduct } from './useProducts';
+import { useDeleteProduct, useUpdateProduct } from './useProducts';
 
 export default function ProductItem({product}) {
   const [isEditing, setIsEditing] = useState(false);
@@ -10,6 +10,7 @@ export default function ProductItem({product}) {
   });
   const {showToast} = useToastStore();
   const updateMutation = useUpdateProduct();
+  const deleteMutation = useDeleteProduct();
 
   const handleUpdate = () => {
     updateMutation.mutate(
@@ -34,7 +35,14 @@ export default function ProductItem({product}) {
   }
 
   const handleDelete = () => {
-    
+    deleteMutation.mutate(product.id, {
+      onSuccess: () => {
+        showToast("삭제 완료");
+      },
+      onError: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   const handleEdit = (e) => {
