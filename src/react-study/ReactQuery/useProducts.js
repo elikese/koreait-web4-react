@@ -75,6 +75,8 @@ export const useGetAllProducts = () => {
 
 const updateProductApi = async (id, product) => {
   const url = `http://localhost:8080/product/${id}`
+  console.log(id);
+  console.log(product);
   const response = await axios.put(url, product);
   return response.data;
 }
@@ -93,4 +95,12 @@ export const useUpdateProduct = () => {
       queryClient.invalidateQueries({queryKey: ["getAllProduct"]})
     }
   });
+}
+
+const deleteProductApi = async () => {
+
+}
+
+export const useDeleteProduct = () => {
+  
 }
