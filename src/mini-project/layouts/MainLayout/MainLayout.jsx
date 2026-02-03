@@ -3,6 +3,7 @@ import { css } from "@emotion/react"
 import * as s from "./styles";
 import Header from "../Header/Header";
 import { Outlet } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 // 전체페이지의 레이아웃 구조를 정의
 export default function MainLayout() {
