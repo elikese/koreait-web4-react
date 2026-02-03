@@ -45,8 +45,38 @@ export const userSection = css`
 `;
 
 export const myPageLink = css`
+  font-size: 16px;
+  color: #666;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 
+  &:hover {
+    color: #333;
+  }
 
+  & > svg {
+    font-size: 18px;
+  }
+`;
+
+export const logoutButton = css`
+  font-size: 16px;
+  color: #666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &:hover {
+    color: #333;
+  }
+  & > svg {
+    font-size: 16px;
+  }
 `;
 
 export const loginLink = css`
