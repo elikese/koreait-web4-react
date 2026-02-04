@@ -5,6 +5,7 @@ import only_logo from "../../../assets/only_logo.svg";
 import FormInput from "./components/FormInput";
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
+import { useSignupMutation } from "./hooks/useSignup";
 
 export default function Signup() {
   const {formVal, handleChange} = useForm({
@@ -16,8 +17,32 @@ export default function Signup() {
   });
   // [{},{},{}] => {}
   const [errors, setErrors] = useState({});
+  const { mutate, isPending } = useSignupMutation();
 
   const handleSubmit = () => {
+    if(isPending) return;
+    // FE의 validation
+
+    // spread - rest문법
+    const {passwordConfirm, ...signupDto} = formVal;
+    mutate(signupDto, {
+      onError: (error) => {
+        const adiviceError = error.response.data;
+        if(
+          error.response.status === 400
+          && Array.isArray(adiviceError)
+        ) 
+        {
+          let trimedError = {};
+          // [{username: "~~"}, {password: "~"}]
+          // -> {username: "~~", password: "~"}
+          for(let errorObj of adiviceError) {
+            trimedError = {...trimedError, ...errorObj};
+          }
+          setErrors(trimedError);
+        }
+      }
+    })
 
   }
 

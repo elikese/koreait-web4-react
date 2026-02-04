@@ -27,3 +27,4 @@ instance.interceptors.request.use(
   }
 );
 
+export default instance;
