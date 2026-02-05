@@ -5,7 +5,7 @@ import only_logo from "../../../assets/only_logo.svg";
 import FormInput from "./components/FormInput";
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
-import { useSignupMutation } from "./hooks/useSignup";
+import { useSignupMutation, useSignupValidation } from "./hooks/useSignup";
 
 export default function Signup() {
   const {formVal, handleChange} = useForm({
@@ -18,11 +18,19 @@ export default function Signup() {
   // [{},{},{}] => {}
   const [errors, setErrors] = useState({});
   const { mutate, isPending } = useSignupMutation();
+  const { newError, isAllValidate } = useSignupValidation(formVal);
+
+  // 아이디 input에서 enter -> 비밀번호 input으로 focus
+  // useRef
+  // current
 
   const handleSubmit = () => {
     if(isPending) return;
     // FE의 validation
-
+    if(!isAllValidate) {
+      setErrors(newError);
+      return;
+    }
     // spread - rest문법
     const {passwordConfirm, ...signupDto} = formVal;
     mutate(signupDto, {
@@ -79,6 +87,7 @@ export default function Signup() {
             value={formVal.passwordConfirm}
             onChange={handleChange}
             placeholder="비밀번호를 다시 입력하세요"
+            error={errors.passwordConfirm}
           />
           <FormInput
             type="text"
