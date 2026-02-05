@@ -3,6 +3,7 @@
 import { useMutation } from "@tanstack/react-query"
 import {signupAPI} from "../../../apis/endpoints/auth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const useSignupMutation = () => {
   const navigator = useNavigate();
@@ -10,15 +11,15 @@ export const useSignupMutation = () => {
   return useMutation({
     mutationFn: signupAPI,
     onSuccess: () => {
-      console.log("회원가입 완료") // 전역토스트
+      toast.success("회원가입 성공!") // 전역토스트
       navigator("/signin");
     },
     onError: (error) => {
       // 서버에서 내려주는 validation에러는
       // 상태로 처리할것임
       console.log(error.response);
-      const msg = error.response?.data?.message
-      console.log(msg); // 전역토스트
+      const msg = error.response?.data
+      toast.error(msg);
     }
   })
 

@@ -4,6 +4,7 @@ import logo from "../../../assets/only_logo.svg";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { useSigninMutation } from "./hooks/useSignin";
+import { toast } from "react-toastify";
 
 export default function Signin() {
   const {formVal, handleChange} = useForm({
@@ -21,7 +22,10 @@ export default function Signin() {
     mutate(formVal, {
       onSuccess: () => {
         // 새로고침 + 홈url로
-        window.location.href = "/"
+        // 토스트상태 유지하려고 setTimeout적용할게요
+        setTimeout(() => {
+          window.location.href = "/"
+        }, 2500);
       }
     })
   }
