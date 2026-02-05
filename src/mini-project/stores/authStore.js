@@ -24,6 +24,7 @@ export const useAuthStore = create((set) => {
         accessToken: accessToken
       });
     },
+    
     logout: () => {
       localStorage.removeItem("accessToken");
       set({
